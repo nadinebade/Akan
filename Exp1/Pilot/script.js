@@ -1,3 +1,13 @@
+/* initialize jsPsych */
+var jsPsych = initJsPsych({
+  on_finish: function() {
+    jsPsych.data.displayData();
+  }
+});
+
+/* create timeline */
+var timeline = [];
+
 // generate random sequence of 10 characters as subject ID
 var theSubject = jsPsych.randomization.randomID(10);
 
@@ -5,18 +15,24 @@ var theSubject = jsPsych.randomization.randomID(10);
 jsPsych.data.addProperties({ subjectId: theSubject });
 jsPsych.data.addProperties({ group_name: "group1" });
 
+var audio = ['audio/Audio1.mp3', 'audio/Audio2.mp3', 'audio/Audio3.mp3', 'audio/Audio4.mp3', 'audio/Audio5.mp3', 'audio/Audio6.mp3'];
+
 var preload = {
   type: jsPsychPreload,
-  auto_preload: true 
+  audio: audio 
 };
+
+timeline.push(preload);
 
 // set up instructions, reading "instructions_text" from instructions.js
 var instructions_block = {
-  type: "instructions",
+  type: jsPsychInstructions,
   show_clickable_nav: true,
   pages: instructions_text,
   data: { questionId: "instructions" }
 };
+
+timeline.push(instructions_block);
 
 // var trial_block = {
 //   type: "instructions",
@@ -37,22 +53,19 @@ var instructions_block = {
 //   }
 // }
 
-// set up consent form
-var consent_block = {
-  type: "consent-dec",
-  data: { questionId: "consent" }
-};
 
 // create a trial to assess an inference
 var trial_creator = function(stimulus) {
   return {
-    type: "audio-slider-response",
+    type: jsPsychAudioSliderResponse,
     stimulus: stimulus.stim,
     require_movement: true,
     data: stimulus.data,
+    prompt: "<p>How likely was the sentence uttered by an Akan speaker?</p>",
     min: 1,
     max: 4,
     start: 1,
+    labels: ["very unlikely", "very likely"],
     step: 1
   };
 };
@@ -86,13 +99,6 @@ for (var i in material) {
 
 stimuli_set = jsPsych.randomization.shuffle(stimuli_set);
 
-var timeline = new Array;
-
-timeline.push(preload);
-
-timeline.push(consent_block);
-timeline.push(instructions_block);
-//timeline.push(trial_block);
 
 for (var i in stimuli_set) {
   timeline.push(stimuli_set[i]);
@@ -101,13 +107,4 @@ for (var i in stimuli_set) {
 timeline.push(demographics_block);
 
 // and this starts the experiment
-jsPsych.init({
-  timeline: timeline,
-  show_progress_bar: true,
-  on_finish: function(data){ SaveData("possibility-modals-ii",
-                                      theSubject,
-                                      jsPsych.data.get().csv);
-                             $(".jspsych-content").html("<center><p>Thank you for completing the experiment.  <strong>Please enter the code below into mTurk</strong>.  Your payment will be processed <strong>within 24 hours</strong>.</p></center><div class='jspsych-submit-code'>" + theSubject + "</div>");
-                             }
-
-});
+jsPsych.run(timeline);
