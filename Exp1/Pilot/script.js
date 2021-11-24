@@ -66,7 +66,9 @@ var trial_creator = function(stimulus) {
     max: 4,
     start: 1,
     labels: ["very unlikely", "very likely"],
-    step: 1
+    step: 1,
+    prompt_delay: 500,
+    button_delay: 500
   };
 };
 
