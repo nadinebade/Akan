@@ -1,0 +1,124 @@
+html {
+    font-size: 100%
+    padding-left: 1rem;
+    padding-right: 1rem;
+    display: flex;
+    flex: 1;
+    flex-grow: 1;
+    flex-flow: column nowrap;
+}
+
+body{
+    font-size: 12pt;
+    width: 100%;
+    max-width: 800px;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    padding-left: 4rem;
+    padding-right: 4rem;
+    padding-bottom: 1rem;
+    padding-top: 1rem;
+    line-height: 1.6;
+    color: #212121;
+    background-color:#fffff8;
+}
+
+table {
+    border:0;
+    border-collapse:separate;
+    border-spacing:0;
+    border-top: 2px solid #111;
+    border-bottom: 2px solid #111;
+    width: 125%;
+}
+
+thead tr th {
+    border-bottom: 2px solid #111;
+}
+
+td, th {
+    padding: 10px;
+    border-bottom: 1px solid;
+}
+tr.even {
+    background-color: #f2f2f2;
+}
+
+h1.title {
+    font-size: 32pt;
+}
+
+p.subtitle {
+    font-size: 16pt;
+    font-weight: bold;
+}
+
+p.author {
+    font-size: 14pt;
+    font-style: italic;
+}
+
+p {
+    text-align: justify;
+}
+
+
+/* Dealing with numbered examples */
+body {
+    counter-reset: examples-counter;
+}
+
+ol.example {
+    list-style: none;
+    padding-inline-start: 0;
+}
+
+ol.example > li {
+    counter-increment: examples-counter;
+    position: relative;
+    margin-left: 30px;
+}
+
+ol.example > li::before {
+    content: "(" counter(examples-counter) ") ";
+    position: absolute;
+    left: -30px;
+}
+
+
+/* Commenting tools for collaborative editing */
+div.comment-sm::before {
+    content: "Comment by Salvador";
+    font-weight: bold;
+    
+}
+
+div.comment-sm {
+    border-left: 5px solid #8b0000;
+    padding: 0 15px;
+    color: #8b0000;
+}
+
+div.comment-sm-warn::before {
+    content: "Comment by Salvador (low priority)";
+    font-weight: bold;
+    
+}
+
+div.comment-sm-warn {
+    border-left: 5px solid #ff8c00;
+    padding: 0 15px;
+    color: #ff8c00;
+}
+
+div.comment-lp::before {
+    content: "Comment by Léo";
+    font-weight: bold;
+    
+}
+
+div.comment-lp {
+    border-left: 5px solid #4169e1;
+    padding: 0 15px;
+    color: #4169e1;
+}

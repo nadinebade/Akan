@@ -1,0 +1,75 @@
+#!/bin/python3
+# coding: utf8
+
+"""
+A simple script to split CSV files from jsPsych, more specifically to split
+lines where multiple answeres are contained as a single object while the
+questions are independant
+
+Bascically, this:
+
+...,responses       ,...
+...,{Q0:0,Q1:4,Q2,2},...
+
+becomes this:
+
+...,responses       ,...,orderId
+...,0               ,...,0
+...,4               ,...,1
+...,2               ,...,2
+
+Note that it includes an ad-hoc subcase for the "hidden" id hack where the
+question starts with <p hidden>X</p>, in the sense that it drops the html tags.
+
+Usage:
+  expandCSVjsPsych.py <input_filename> [<output_filename>]
+  expandCSVjsPsych.py -h
+
+Options:
+  -h --help          Shows this
+
+Made with ❤ by Mathias
+"""
+
+import docopt
+import csv
+import sys
+import re
+
+withinBrackets = re.compile('"Q(\d)+":"(.*?)"[,]{0,1}')
+hidden         = re.compile('.p hidden.(\d)..p.') # Too permisive. Meh.
+
+if __name__ == '__main__':
+    arguments = docopt.docopt(__doc__)
+    if '<input_filename>' in arguments:
+        inputFilename =  arguments['<input_filename>']
+        if '<output_filename>' in arguments \
+                and arguments['<output_filename>'] != None:
+            o = open(arguments['<output_filename>'], 'w')
+        else:
+            o = sys.stdout
+        try:
+            with open(inputFilename) as f:
+                output = csv.writer(o, delimiter=',',
+                        escapechar=' ', quoting=csv.QUOTE_ALL)
+                reader = list(csv.reader(f))
+                columnResponses = reader[0].index("responses")
+                reader[0] = reader[0] + ["orderId"]
+                columnOrderId = reader[0].index("orderId")
+                output.writerow(reader[0])
+                for row in reader[1:]:
+                    toSplit = row[columnResponses]
+                    splitted = [('', toSplit)]
+                    if len(toSplit) > 0:
+                        if toSplit[0] == '{' and toSplit[-1] == '}':
+                            splitted = withinBrackets.findall(toSplit[1:-1])
+                    for e1,e2 in splitted:
+                        newLine = row
+                        if hidden.match(e2):
+                            e2 = hidden.findall(e2)[0]
+                        newLine[columnResponses] = e2
+                        newLine = newLine + [e1]
+                        output.writerow(newLine)
+        except IOError:
+            print('There was an error opening the file. Can I read files '
+                +inputFilename+' and '+outputFilename+'?')
