@@ -34,79 +34,121 @@ var instructions_block = {
 
 timeline.push(instructions_block);
 
-// var trial_block = {
-//   type: "instructions",
-//   show_clickable_nav: true,
-//   pages: practice_text,
-//   data: { questionId: "practice"},
-//   on_load: function () {
-//     var theSlider = document.getElementById("jspsych-audio-slider-response-response");
-//     var rangeBullet = document.getElementById("rs-bullet");
+var practice_block = {
+type: jsPsychAudioSliderResponse,
+stimulus: "audio/Audio1.mp3",
+prompt: "<p>How likely was the sentence uttered by an Akan speaker?</p>",
+    min: 1,
+    max: 4,
+    start: 1,
+    labels: ["very unlikely", "very likely"],
+    step: 1
+}
 
-//     function sliderValueUpdater() {
-//       rangeBullet.innerHTML = theSlider.value;
-//       var bulletPosition = ((theSlider.value - 1)/(theSlider.max - 1));
-//       rangeBullet.style.left = (bulletPosition * 478) + "px";
-//     }
+timeline.push(practice_block)
 
-//     theSlider.addEventListener("input", sliderValueUpdater, false);
-//   }
-// }
+// set up instructions, reading "instructions_text" from instructions.js
+var continue_block = {
+  type: jsPsychInstructions,
+  show_clickable_nav: true,
+  pages: continue_next,
+  data: { questionId: "practice" }
+};
+
+timeline.push(continue_block);
+
+var practice_block2 = {
+  type: jsPsychAudioSliderResponse,
+  stimulus: "audio/Audio6.mp3",
+  prompt: "<p>How likely was the sentence uttered by an Akan speaker?</p>",
+      min: 1,
+      max: 4,
+      start: 1,
+      labels: ["very unlikely", "very likely"],
+      step: 1,
+  }
+  
+  timeline.push(practice_block2)
+
+  var continue_block2 = {
+    type: jsPsychInstructions,
+    show_clickable_nav: true,
+    pages: continue_next2,
+    data: { questionId: "practice2" }
+  };
+  
+  timeline.push(continue_block2);
 
 
 // create a trial to assess an inference
-var trial_creator = function(stimulus) {
-  return {
+var scale = {
     type: jsPsychAudioSliderResponse,
-    stimulus: stimulus.stim,
+    stimulus: jsPsych.timelineVariable('audio'),
     require_movement: true,
-    data: stimulus.data,
+    data: {
+      id: jsPsych.timelineVariable('id'),
+      sentence: jsPsych.timelineVariable('sentence'),
+      type: jsPsych.timelineVariable('type'),
+    },
     prompt: "<p>How likely was the sentence uttered by an Akan speaker?</p>",
     min: 1,
     max: 4,
     start: 1,
     labels: ["very unlikely", "very likely"],
-    step: 1,
-    prompt_delay: 500,
-    button_delay: 500
-  };
-};
-
-// these functions create the stimuli to be passed to inferenceCreator
-// each of them corresponds to a different participants groups and a different
-// format of inferences.
-
-// allowed(A and B), A: B?
-var critical_maker = function(material) {
-  var stimulus = material.audio 
-  var data = {
-    id: material.id,
-    expect: material.type,
-    nickname: material.sentence
+    step: 1
   };
 
-  return {stim: stimulus,
-          data: data};
+
+  var comment = {
+    type: jsPsychSurveyText,
+    name: "Comments",
+    questions: [ {prompt:  'Why and how did you make your last choice?' } ],
+    data: {
+      id: jsPsych.timelineVariable('id'),
+      sentence: jsPsych.timelineVariable('sentence'),
+      type: jsPsych.timelineVariable('type'),
+    }
+  };
+
+
+var test_procedure = {
+  timeline: [scale, comment],
+  timeline_variables: material,
+  randomize_order: true,
+  repetitions: 1
 };
 
+timeline.push(test_procedure);
 
-var trial_maker = critical_maker;
+// var critical_maker = function(material) {
+//   var stimulus = material.audio 
+//   var data = {
+//     id: material.id,
+//     expect: material.type,
+//     nickname: material.sentence
+//   };
 
-var stimuli_set = new Array;
-
-for (var i in material) {
-  stimuli_set.push(trial_creator(trial_maker(material[i])));
-}
+//   return {stim: stimulus,
+//           data: data};
+// };
 
 
-stimuli_set = jsPsych.randomization.shuffle(stimuli_set);
+// var trial_maker = critical_maker;
+
+// var stimuli_set = new Array;
+
+// for (var i in material) {
+//   stimuli_set.push(trial_creator(trial_maker(material[i])));
+// }
 
 
-for (var i in stimuli_set) {
-  timeline.push(stimuli_set[i]);
-}
+// stimuli_set = jsPsych.randomization.shuffle(stimuli_set);
 
-timeline.push(demographics_block);
+
+// for (var i in stimuli_set) {
+//   timeline.push(stimuli_set[i]);
+// }
+
 
 // and this starts the experiment
 jsPsych.run(timeline);

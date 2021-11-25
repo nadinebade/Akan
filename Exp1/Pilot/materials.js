@@ -8,7 +8,7 @@ var material = [
 
   { audio: "audio/Audio2.mp3",
   sentence: "A pepper on Abigail's plate is red.",
-  id: "item.3",
+  id: "item.2",
   type: "critical",
 },
 
