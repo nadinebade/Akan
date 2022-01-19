@@ -37,7 +37,7 @@ timeline.push(instructions_block);
 var practice_block = {
 type: jsPsychAudioSliderResponse,
 stimulus: "audio/Audio1.mp3",
-prompt: "<p>How confident are you that the sentence was uttered by a native speaker of Akan?</p>",
+prompt: "<p>How confident are you that the sentence was uttered by a speaker of Akan?</p>",
     min: 1,
     max: 4,
     start: 1,
@@ -60,11 +60,11 @@ timeline.push(continue_block);
 var practice_block2 = {
   type: jsPsychAudioSliderResponse,
   stimulus: "audio/Audio6.mp3",
-  prompt: "<p>How confident are you that the sentence was uttered by a native speaker of Akan?</p>",
+  prompt: "<p>How confident are you that the sentence was uttered by a speaker of Akan?</p>",
       min: 1,
       max: 4,
       start: 1,
-      labels: ["not very confident", "very confident"],
+      labels: ["not at all confident", "very confident"],
       step: 1,
   }
   
@@ -90,11 +90,11 @@ var scale = {
       sentence: jsPsych.timelineVariable('sentence'),
       type: jsPsych.timelineVariable('type'),
     },
-    prompt: "<p>How confident are you that the sentence was uttered by a native speaker of Akan?</p>",
+    prompt: "<p>How confident are you that the sentence was uttered by a speaker of Akan?</p>",
     min: 1,
     max: 4,
     start: 1,
-    labels: ["not very confident", "very confident"],
+    labels: ["not at all confident", "very confident"],
     step: 1
   };
 
