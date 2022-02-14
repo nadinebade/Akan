@@ -140,6 +140,12 @@ var jsPsychAudioButtonResponse = (function (jspsych) {
                   }
               }
               var html = '<div id="jspsych-audio-button-response-btngroup">';
+
+              //show prompt if there is one
+              if (trial.prompt !== null) {
+                html += trial.prompt;
+            }
+            
               for (var i = 0; i < trial.choices.length; i++) {
                   var str = buttons[i].replace(/%choice%/g, trial.choices[i]);
                   html +=
@@ -156,10 +162,7 @@ var jsPsychAudioButtonResponse = (function (jspsych) {
                           "</div>";
               }
               html += "</div>";
-              //show prompt if there is one
-              if (trial.prompt !== null) {
-                  html += trial.prompt;
-              }
+              
               display_element.innerHTML = html;
               if (trial.response_allowed_while_playing) {
                   enable_buttons();

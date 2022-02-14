@@ -15,14 +15,26 @@ var theSubject = jsPsych.randomization.randomID(10);
 jsPsych.data.addProperties({ subjectId: theSubject });
 jsPsych.data.addProperties({ group_name: "group1" });
 
-var audio = ['audio/Audio1.mp3', 'audio/Audio2.mp3', 'audio/Audio3.mp3', 'audio/Audio4.mp3', 'audio/Audio5.mp3', 'audio/Audio6.mp3'];
+var audio = ['audio/filler_1_1.mp3', 'audio/filler_1_2.mp3', 'audio/filler_1_3.mp3','audio/filler_1_4.mp3','audio/filler_1_5.mp3', 'audio/filler_2_1.mp3', 'audio/filler_2_2.mp3', 'audio/filler_2_3.mp3', 'audio/filler_3_1.mp3', 'audio/filler_3_2.mp3', 'audio/filler_3_3.mp3', 'audio/filler_3_4.mp3','audio/filler_3_5.mp3','audio/filler_3_6.mp3', 'audio/item_1_1.mp3','audio/item_1_2.mp3', 'audio/item_1_3.mp3', 'audio/item_1_4.mp3', 'audio/item_1_5.mp3', 'audio/item_1_6.mp3','audio/item_1_7.mp3', 'audio/item_1_8.mp3', 'audio/item_1_9.mp3', 'audio/item_1_10.mp3', 'audio/item_1_11.mp3', 'audio/item_1_12.mp3', 'audio/item_2_1.mp3', 'audio/item_2_2.mp3', 'audio/item_2_3.mp3', 'audio/item_2_4.mp3', 'audio/item_2_5.mp3', 'audio/item_2_6.mp3', 'audio/item_2_7.mp3', 'audio/item_2_8.mp3', 'audio/item_2_9.mp3', 'audio/item_2_10.mp3', 'audio/item_2_11.mp3', 'audio/item_2_12.mp3', 'audio/item_3_1.mp3', 'audio/item_3_2.mp3', 'audio/item_3_3.mp3', 'audio/item_3_4.mp3', 'audio/item_3_5.mp3', 'audio/item_3_6.mp3', 'audio/item_3_7.mp3', 'audio/item_3_8.mp3', 'audio/item_3_9.mp3', 'audio/item_3_10.mp3', 'audio/item_3_11.mp3', 'audio/item_3_12.mp3', 'audio/item_4_1.mp3', 'audio/item_4_2.mp3', 'audio/item_4_3.mp3', 'audio/item_4_4.mp3', 'audio/item_4_5.mp3', 'audio/item_4_6.mp3', 'audio/item_4_7.mp3', 'audio/item_4_8.mp3', 'audio/item_4_9.mp3', 'audio/item_4_10.mp3', 'audio/item_4_11.mp3', 'audio/item_4_12.mp3',];
+
+
 
 var preload = {
   type: jsPsychPreload,
   audio: audio 
 };
 
+
+
 timeline.push(preload);
+
+
+
+function play() {
+  var audio_intro = new Audio('audio/Intro.mp3');
+  audio_intro.play();
+};
+
 
 // set up instructions, reading "instructions_text" from instructions.js
 var instructions_block = {
@@ -32,12 +44,28 @@ var instructions_block = {
   data: { questionId: "instructions" }
 };
 
+
+
+// set up instoduction in Akan
+var instructions_block2 = {
+  type: jsPsychInstructions,
+  show_clickable_nav: true,
+  pages: [
+    'Welcome to our experiment! Click on "PLAY" to hear a description of the experiment in Akan. <p class = "center-content"><input type="button" value="PLAY" onclick="play()"></><p class = "center-content">Click "Next" to continue to further instructions.</>'
+    ], 
+  data: { questionId: "instructions" }
+};
+
+timeline.push(instructions_block2);
 timeline.push(instructions_block);
+
+
+
 
 var practice_block = {
 type: jsPsychAudioSliderResponse,
-stimulus: "audio/Audio1.mp3",
-prompt: "<p>How confident are you that the sentence was uttered by a speaker of Akan?</p>",
+stimulus: "audio/Training_Gram.mp3",
+prompt: "<p>How confident are you that the sentence is uttered by a speaker of Akan?</p>",
     min: 1,
     max: 4,
     start: 1,
@@ -59,7 +87,7 @@ timeline.push(continue_block);
 
 var practice_block2 = {
   type: jsPsychAudioSliderResponse,
-  stimulus: "audio/Audio6.mp3",
+  stimulus: "audio/Training_Ungram.mp3",
   prompt: "<p>How confident are you that the sentence was uttered by a speaker of Akan?</p>",
       min: 1,
       max: 4,
@@ -90,12 +118,26 @@ var scale = {
       sentence: jsPsych.timelineVariable('sentence'),
       type: jsPsych.timelineVariable('type'),
     },
-    prompt: "<p>How confident are you that the sentence was uttered by a speaker of Akan?</p>",
+    prompt: "<p>How confident are you that the sentence is uttered by a speaker of Akan?</p>",
     min: 1,
     max: 4,
     start: 1,
     labels: ["not at all confident", "very confident"],
     step: 1
+  };
+
+  var attention1 = {
+    type: jsPsychAudioButtonResponse,
+    stimulus: 'audio/Attention_1_Question.mp3',
+    choices: ['his mother', 'his sister', 'his brother'],
+    prompt: "<p class='center-content'>Who did Kofi call?</p>"
+  };
+
+  var attention2 = {
+    type: jsPsychAudioButtonResponse,
+    stimulus: 'audio/Attention_2_Question.mp3',
+    choices: ['Yaw', 'Ebo', 'Mensah'],
+    prompt: "<p class='center-content'>Who planted the seeds?</p>"
   };
 
 
@@ -118,7 +160,19 @@ var test_procedure = {
   repetitions: 1
 };
 
+// var test_procedure2 = {
+//   timeline: [test_procedure, attention1, attention2],
+//   randomize_order: true,
+//   repetitions: 1
+// };
+
+
+
+
 timeline.push(test_procedure);
+
+timeline.push(attention2);
+timeline.push(attention1);
 
 // var critical_maker = function(material) {
 //   var stimulus = material.audio 
