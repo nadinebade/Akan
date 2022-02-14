@@ -1,6 +1,6 @@
 /* initialize jsPsych */
 var jsPsych = initJsPsych({
-  on_finish: function(){ saveData(jsPsych.data.get().csv()); }
+  on_finish: function(){ SaveData(jsPsych.data.get().csv()); }
 });
 
 // progress bar
