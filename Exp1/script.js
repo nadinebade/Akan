@@ -1,19 +1,28 @@
 /* initialize jsPsych */
 var jsPsych = initJsPsych({
-  on_finish: function() {
-    jsPsych.data.displayData();
-  }
+  on_finish: function(){ saveData(jsPsych.data.get().csv()); }
 });
+
+// progress bar
+
+var jsPsych = initJsPsych({
+  show_progress_bar: true
+});
+
 
 /* create timeline */
 var timeline = [];
+
+// create project name
+
+var projectName = "Akan-exp1";
 
 // generate random sequence of 10 characters as subject ID
 var theSubject = jsPsych.randomization.randomID(10);
 
 // and add it to the data being saved
 jsPsych.data.addProperties({ subjectId: theSubject });
-jsPsych.data.addProperties({ group_name: "group1" });
+jsPsych.data.addProperties({ group_name: list });
 
 var audio = ['audio/filler_1_1.mp3', 'audio/filler_1_2.mp3', 'audio/filler_1_3.mp3','audio/filler_1_4.mp3','audio/filler_1_5.mp3', 'audio/filler_2_1.mp3', 'audio/filler_2_2.mp3', 'audio/filler_2_3.mp3', 'audio/filler_3_1.mp3', 'audio/filler_3_2.mp3', 'audio/filler_3_3.mp3', 'audio/filler_3_4.mp3','audio/filler_3_5.mp3','audio/filler_3_6.mp3', 'audio/item_1_1.mp3','audio/item_1_2.mp3', 'audio/item_1_3.mp3', 'audio/item_1_4.mp3', 'audio/item_1_5.mp3', 'audio/item_1_6.mp3','audio/item_1_7.mp3', 'audio/item_1_8.mp3', 'audio/item_1_9.mp3', 'audio/item_1_10.mp3', 'audio/item_1_11.mp3', 'audio/item_1_12.mp3', 'audio/item_2_1.mp3', 'audio/item_2_2.mp3', 'audio/item_2_3.mp3', 'audio/item_2_4.mp3', 'audio/item_2_5.mp3', 'audio/item_2_6.mp3', 'audio/item_2_7.mp3', 'audio/item_2_8.mp3', 'audio/item_2_9.mp3', 'audio/item_2_10.mp3', 'audio/item_2_11.mp3', 'audio/item_2_12.mp3', 'audio/item_3_1.mp3', 'audio/item_3_2.mp3', 'audio/item_3_3.mp3', 'audio/item_3_4.mp3', 'audio/item_3_5.mp3', 'audio/item_3_6.mp3', 'audio/item_3_7.mp3', 'audio/item_3_8.mp3', 'audio/item_3_9.mp3', 'audio/item_3_10.mp3', 'audio/item_3_11.mp3', 'audio/item_3_12.mp3', 'audio/item_4_1.mp3', 'audio/item_4_2.mp3', 'audio/item_4_3.mp3', 'audio/item_4_4.mp3', 'audio/item_4_5.mp3', 'audio/item_4_6.mp3', 'audio/item_4_7.mp3', 'audio/item_4_8.mp3', 'audio/item_4_9.mp3', 'audio/item_4_10.mp3', 'audio/item_4_11.mp3', 'audio/item_4_12.mp3',];
 
