@@ -76,12 +76,6 @@ jsPsych.plugins["prime-images"] = (function() {
         default: 1000,
         description: "Time to display feedback message before continue button appears"
       },
-      picture_delay: {
-          type: jsPsych.plugins.parameterType.INT,
-          pretty_name: 'picture delay',
-          default: null,
-          description: 'Delays until picture is shown.'
-          },
       continue_text: {
         type: jsPsych.plugins.parameterType.STRING,
         pretty_name: "Continue button text",
@@ -130,26 +124,6 @@ jsPsych.plugins["prime-images"] = (function() {
     for (i = 0; i < trial.images.length; i++)
       thePicture += "<span class=\"" + pluginPrefix + "images-table-cell\" style=\"display:table-cell;color:" + trial.colors[i] + "; padding-left:" + trial.images_padding[2 * i] + "px;padding-right:" + trial.images_padding[2 * i + 1] + "px; \">" + trial.images[i] + "</span>";
     display_element.innerHTML += thePicture + "</div></div>";
-
-    var y = document.getElementsByClassName("lang-reason-prime-images-images-table-cell");
-    var i;
-    for (i = 0; i < y.length; i++) {
-      y[i].style.visibility = "hidden";
-    }
-
-
-
-  if (trial.picture_delay !== null) {
-   jsPsych.pluginAPI.setTimeout(function() {
-     for (i = 0; i < y.length; i++) {
-       y[i].style.visibility = "visible";
-     }
-   }, trial.picture_delay);
- } else {
-   for (i = 0; i < y.length; i++) {
-     y[i].style.visibility = "visible";
-   }
- }
 
     // Show prompt if there is one
     if (trial.prompt !== "" || trial.feedback_function != null) {

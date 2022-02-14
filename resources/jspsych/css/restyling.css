@@ -98,7 +98,7 @@ body {
 }
 
 .jspsych-btn {
-  margin: 2em;
+  margin: 0em;
 }
 
 .left {
@@ -170,7 +170,7 @@ p.jspsych-survey-sort-text {
 }
 #jspsych-progressbar-container > span {
   display: none;
-  3argin-bottom: 5px;
+  margin-bottom: 5px;
 }
 
 #jspsych-progressbar-outer {

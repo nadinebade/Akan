@@ -1,17 +1,3 @@
-/* initialize jsPsych */
-
-var jsPsych = initJsPsych({
- // timeline: timeline,
-  show_progress_bar: true,
- on_finish: function(){ SaveData(projectName,
-                                     theSubject,
-                                     jsPsych.data.get().csv);
-                             $(".jspsych-content").html("<center><p>Thank you for completing the experiment.  <strong>Please enter the code below on Prolific.</strong></p></center></p></center><center><p> 60088B0F </p></center>"); }
-//   on_finish: function(data){ jsPsych.data.displayData("json"); }
-});
-
-
-
 /* create timeline */
 var timeline = [];
 
@@ -74,7 +60,7 @@ timeline.push(instructions_block);
 
 
 var practice_block = {
-type: jsPsychAudioSliderResponse,
+type: "audio-slider-response",
 stimulus: "audio/Training_Gram.mp3",
 prompt: "<p>How confident are you that the sentence is uttered by a speaker of Akan?</p>",
     min: 1,
@@ -88,7 +74,7 @@ timeline.push(practice_block)
 
 // set up instructions, reading "instructions_text" from instructions.js
 var continue_block = {
-  type: jsPsychInstructions,
+  type: "instructions",
   show_clickable_nav: true,
   pages: continue_next,
   data: { questionId: "practice" }
@@ -97,7 +83,7 @@ var continue_block = {
 timeline.push(continue_block);
 
 var practice_block2 = {
-  type: jsPsychAudioSliderResponse,
+  type: "audio-slider-response",
   stimulus: "audio/Training_Ungram.mp3",
   prompt: "<p>How confident are you that the sentence was uttered by a speaker of Akan?</p>",
       min: 1,
@@ -110,7 +96,7 @@ var practice_block2 = {
   timeline.push(practice_block2)
 
   var continue_block2 = {
-    type: jsPsychInstructions,
+    type: "instructions",
     show_clickable_nav: true,
     pages: continue_next2,
     data: { questionId: "practice2" }
@@ -121,7 +107,7 @@ var practice_block2 = {
 
 // create a trial to assess an inference
 var scale = {
-    type: jsPsychAudioSliderResponse,
+    type: "audio-slider-response",
     stimulus: jsPsych.timelineVariable('audio'),
     require_movement: true,
     data: {
@@ -138,14 +124,14 @@ var scale = {
   };
 
   var attention1 = {
-    type: jsPsychAudioButtonResponse,
+    type: "audio-button-response",
     stimulus: 'audio/Attention_1_Question.mp3',
     choices: ['his mother', 'his sister', 'his brother'],
     prompt: "<p class='center-content'>Who did Kofi call?</p>"
   };
 
   var attention2 = {
-    type: jsPsychAudioButtonResponse,
+    type: "audio-button-response",
     stimulus: 'audio/Attention_2_Question.mp3',
     choices: ['Yaw', 'Ebo', 'Mensah'],
     prompt: "<p class='center-content'>Who planted the seeds?</p>"
@@ -153,7 +139,7 @@ var scale = {
 
 
   var comment = {
-    type: jsPsychSurveyText,
+    type: "survey-text",
     name: "Comments",
     questions: [ {prompt:  'Why and how did you make your last choice?' } ],
     data: {
@@ -216,4 +202,15 @@ timeline.push(attention1);
 
 
 // and this starts the experiment
-jsPsych.run(timeline);
+
+
+// and this starts the experiment
+jsPsych.init({
+  timeline: timeline,
+  show_progress_bar: true,
+ on_finish: function(data){ SaveData(projectName,
+                                     theSubject,
+                                     jsPsych.data.get().csv);
+                             $(".jspsych-content").html("<center><p>Thank you for completing the experiment.  <strong>Please enter the code below on Prolific.</strong></p></center></p></center><center><p> 60088B0F </p></center>"); }
+//   on_finish: function(data){ jsPsych.data.displayData("json"); }
+});

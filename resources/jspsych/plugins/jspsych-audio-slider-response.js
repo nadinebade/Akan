@@ -1,13 +1,3 @@
-/**
- * jspsych-audio-slider-response
- * extends the original jspsych-audio-slider-response with replay functionality
- *
- * WooJin Chung
- *
- * documentation: docs.jspsych.org
- *
- */
-
 jsPsych.plugins['audio-slider-response'] = (function() {
 	var plugin = {};
 
@@ -61,19 +51,6 @@ jsPsych.plugins['audio-slider-response'] = (function() {
         array: false,
         description: 'Label of the button to advance.'
       },
-      replay_button_label: {
-        type: jsPsych.plugins.parameterType.STRING,
-        pretty_name: 'Replay Button label',
-        default: 'Replay',
-        array: false,
-        description: 'Label of the button to replay.'
-      },
-      max_replays: {
-        type: jsPsych.plugins.parameterType.INT,
-        pretty_name: 'Maximum replays',
-        default: 0,
-        description: 'Maximum number of replays.'
-      },
       prompt: {
         type: jsPsych.plugins.parameterType.STRING,
         pretty_name: 'Prompt',
@@ -109,9 +86,8 @@ jsPsych.plugins['audio-slider-response'] = (function() {
     }
 
     // set up end event if trial needs it
-    // otherwise add event which enables replay button
-    if (trial.trial_ends_after_audio) {
-      if (context !== null) {
+    if(trial.trial_ends_after_audio){
+      if(context !== null){
         source.onended = function() {
           end_trial();
         }
@@ -119,19 +95,8 @@ jsPsych.plugins['audio-slider-response'] = (function() {
         audio.addEventListener('ended', end_trial);
       }
     }
-    else if (trial.max_replays > 0) {
-      if(context !== null){
-        source.onended = function() {
-          display_element.querySelector('#jspsych-audio-slider-response-replay').disabled = false;
-        }
-      } else {
-        audio.addEventListener('ended', function() {
-          display_element.querySelector('#jspsych-audio-slider-response-replay').disabled = false;
-        });
-      }
-    }
 
-    var html = '<div id="jspsych-audio-slider-response-wrapper" style="margin: 50px 0px;">';
+    var html = '<div id="jspsych-audio-slider-response-wrapper" style="margin: 100px 0px;">';
   	html += '<div class="jspsych-audio-slider-response-container" style="position:relative;">';
     html += '<input type="range" value="'+trial.start+'" min="'+trial.min+'" max="'+trial.max+'" step="'+trial.step+'" style="width: 100%;" id="jspsych-audio-slider-response-response"></input>';
     html += '<div>'
@@ -150,30 +115,17 @@ jsPsych.plugins['audio-slider-response'] = (function() {
 	    html += trial.prompt;
 		}
 
-    html += '<div style="margin: 0px;">';
-    
-    // add replay button
-    if (trial.max_replays > 0) {
-      html += '<button id="jspsych-audio-slider-response-replay" class="jspsych-btn">'+trial.replay_button_label+'</button>';
-    }
-
     // add submit button
     html += '<button id="jspsych-audio-slider-response-next" class="jspsych-btn">'+trial.button_label+'</button>';
 
-    html += '</div>';
-
     display_element.innerHTML = html;
 
-    var replay_count = 0;
     var response = {
       rt: null,
       response: null
     };
 
     display_element.querySelector('#jspsych-audio-slider-response-next').addEventListener('click', function() {
-      // reset replay_count
-      replay_count = 0;
-
       // measure response time
       var endTime = (new Date()).getTime();
 			var rt = endTime - startTime;
@@ -191,34 +143,6 @@ jsPsych.plugins['audio-slider-response'] = (function() {
       }
 
     });
-
-    if (trial.max_replays > 0) {
-      display_element.querySelector('#jspsych-audio-slider-response-replay').addEventListener('click', function() {
-        display_element.querySelector('#jspsych-audio-slider-response-replay').disabled = true;
-        replay_count += 1;
-
-        if(context !== null){
-          let source = context.createBufferSource();
-          source.buffer = jsPsych.pluginAPI.getAudioBuffer(trial.stimulus);
-          source.connect(context.destination);
-          source.onended = function() {
-            if (replay_count < trial.max_replays) {
-              display_element.querySelector('#jspsych-audio-slider-response-replay').disabled = false;
-            }
-          }
-          source.start();
-        } else {
-          let audio = jsPsych.pluginAPI.getAudioBuffer(trial.stimulus);
-          audio.currentTime = 0;
-          audio.addEventListener('ended', function() {
-            if (replay_count < trial.max_replays) {
-              display_element.querySelector('#jspsych-audio-slider-response-replay').disabled = false;
-            }
-          });
-          audio.play();
-        }
-      });
-    }
 
     function end_trial(){
 
@@ -246,11 +170,7 @@ jsPsych.plugins['audio-slider-response'] = (function() {
     }
 
 		var startTime = (new Date()).getTime();
-    // start audio
-    if (trial.max_replays > 0) {
-      display_element.querySelector('#jspsych-audio-slider-response-replay').disabled = true;
-    }
-    
+		// start audio
     if(context !== null){
       startTime = context.currentTime;
       source.start(startTime);

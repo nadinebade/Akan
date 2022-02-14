@@ -5,6 +5,7 @@
  * Josh de Leeuw
  *
  * adapted by Salvador Mascarenhas
+ * further adapted by Nadine Bade
  *
  * documentation: docs.jspsych.org
  *
@@ -24,6 +25,24 @@ jsPsych.plugins['html-slider-response'] = (function() {
         pretty_name: 'Stimulus',
         default: undefined,
         description: 'The HTML string to be displayed'
+      },
+      slider_delay: {
+        type: jsPsych.plugins.parameterType.INT,
+        pretty_name: 'slider delay',
+        default: null,
+        description: 'Delay until slider is shown.'
+      },
+      container_delay: {
+        type: jsPsych.plugins.parameterType.INT,
+        pretty_name: 'container delay',
+        default: null,
+        description: 'Delay until container is shown.'
+      },
+      button_delay: {
+        type: jsPsych.plugins.parameterType.INT,
+        pretty_name: 'button delay',
+        default: null,
+        description: 'Delay until button is shown.'
       },
       min: {
         type: jsPsych.plugins.parameterType.INT,
@@ -92,10 +111,10 @@ jsPsych.plugins['html-slider-response'] = (function() {
 
   plugin.trial = function(display_element, trial) {
 
-    var html = '<div id="masc-html-slider-response-wrapper" style="margin: 100px 0px;">';
+    var html = '<div id="masc-html-slider-response-wrapper" style="margin: 30px 0px;">';
     html += '<div id="masc-html-slider-response-stimulus">' + trial.stimulus + '</div>';
-    html += '<div class="masc-html-slider-response-container" style="position:relative;">';
-    html += '<div class="masc-html-slider-response-value" id="html-slider-response-value">' + trial.start + '%</div>';
+    html += '<div id="masc-html-slider-response-container-slider" class="masc-html-slider-response-container" style="position:relative;">';
+    html += '<div class="masc-html-slider-response-value" id="html-slider-response-value">' + trial.start + '</div>';
     html += '<input type="range" value="'+trial.start+'" min="'+trial.min+'" max="'+trial.max+'" step="'+trial.step+'" style="width: 100%;" id="jspsych-html-slider-response-response"></input>';
     html += '<div>';
     for(var j=0; j < trial.labels.length; j++){
@@ -118,12 +137,38 @@ jsPsych.plugins['html-slider-response'] = (function() {
 
     display_element.innerHTML = html;
 
+// add delay options
+
+    document.getElementById("masc-html-slider-response-stimulus").style.visibility = "hidden";
+    document.getElementById("masc-html-slider-response-container-slider").style.visibility = "hidden";
+    document.getElementById("jspsych-html-slider-response-next").style.visibility = "hidden";
+ 
+  
+    if (trial.slider_delay !== null) {
+      jsPsych.pluginAPI.setTimeout(function() {
+        display_element.querySelector('#masc-html-slider-response-stimulus').style.visibility = "visible";
+      }, trial.slider_delay);
+    } else { display_element.querySelector('#masc-html-slider-response-stimulus').style.visibility = "visible"; }
+
+    if (trial.container_delay !== null) {
+      jsPsych.pluginAPI.setTimeout(function() {
+        display_element.querySelector('#masc-html-slider-response-container-slider').style.visibility = "visible";
+      }, trial.container_delay);
+    } else { display_element.querySelector('#masc-html-slider-response-container-slider').style.visibility = "visible"; }
+
+    if (trial.container_delay !== null) {
+      jsPsych.pluginAPI.setTimeout(function() {
+        display_element.querySelector('#jspsych-html-slider-response-next').style.visibility = "visible";
+      }, trial.container_delay);
+    } else { display_element.querySelector('#jspsych-html-slider-response-next').style.visibility = "visible"; }
+  
+
     // SM: set up value display
     var theSlider = display_element.querySelector('input[type="range"]');
 
     var sliderValueUpdater = function () {
       var sliderValue = display_element.querySelector('#html-slider-response-value');
-      var newValue = theSlider.value + "%";
+      var newValue = theSlider.value + "";
       sliderValue.innerHTML = newValue;
     };
 
@@ -162,12 +207,18 @@ jsPsych.plugins['html-slider-response'] = (function() {
 
     function end_trial(){
 
+      clicks = parseInt(document.getElementById("clicks").innerHTML)
+
+      selected = document.querySelector('input[name="switch-one"]:checked').value;
+
       jsPsych.pluginAPI.clearAllTimeouts();
 
       // save data
       var trialdata = {
         "rt": response.rt,
         "responses": response.response,
+        "clicks": clicks,
+        "button_response": selected,
         // "stimulus": trial.stimulus
       };
 
