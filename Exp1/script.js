@@ -16,17 +16,6 @@ var audio = ['audio/filler_1_1.mp3', 'audio/filler_1_2.mp3', 'audio/filler_1_3.m
 
 
 
-var preload = {
-  type: jsPsychPreload,
-  audio: audio 
-};
-
-
-
-timeline.push(preload);
-
-
-
 function play() {
   var audio_intro = new Audio('audio/Intro.mp3');
   audio_intro.play();
@@ -35,7 +24,7 @@ function play() {
 
 // set up instructions, reading "instructions_text" from instructions.js
 var instructions_block = {
-  type: jsPsychInstructions,
+  type: "instructions",
   show_clickable_nav: true,
   pages: instructions_text,
   data: { questionId: "instructions" }
@@ -45,7 +34,7 @@ var instructions_block = {
 
 // set up instoduction in Akan
 var instructions_block2 = {
-  type: jsPsychInstructions,
+  type: "instructions",
   show_clickable_nav: true,
   pages: [
     'Welcome to our experiment! Click on "PLAY" to hear a description of the experiment in Akan. <p class = "center-content"><input type="button" value="PLAY" onclick="play()"></><p class = "center-content">Click "Next" to continue to further instructions.</>'
@@ -133,7 +122,7 @@ var scale = {
   var attention2 = {
     type: "audio-button-response",
     stimulus: 'audio/Attention_2_Question.mp3',
-    choices: ['Yaw', 'Ebo', 'Mensah'],
+    choices: ['Ebo', 'Yaw', 'Mensah'],
     prompt: "<p class='center-content'>Who planted the seeds?</p>"
   };
 
