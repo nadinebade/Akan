@@ -98,7 +98,6 @@ var practice_block2 = {
 var scale = {
     type: "audio-slider-response",
     stimulus: jsPsych.timelineVariable('audio'),
-    require_movement: true,
     data: {
       id: jsPsych.timelineVariable('id'),
       sentence: jsPsych.timelineVariable('sentence'),
