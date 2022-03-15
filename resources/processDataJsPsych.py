@@ -43,7 +43,7 @@ Options:
                               [default: responses]
 
 """
-from __future__ import print_function
+
 import docopt
 import csv
 import json
@@ -52,8 +52,6 @@ import tempfile
 import glob
 import sys
 import shutil
-
-
 
 
 class jsPsychCSVError(Exception):

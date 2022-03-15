@@ -103,7 +103,7 @@ jsPsych.plugins['survey-multi-choice'] = (function() {
 
       // add question text
       $(question_selector).append(
-        '<p class="' + plugin_id_name + '-text survey-multi-choice" style="text-align:center">' + trial.questions[i] + '</p>'
+        '<p class="' + plugin_id_name + '-text-survey-multi-choice" style="text-align:center">' + trial.questions[i] + '</p>'
       );
 
       var option_container_id_name = _join(plugin_id_name, "option", i);

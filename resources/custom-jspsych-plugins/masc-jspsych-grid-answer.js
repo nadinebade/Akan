@@ -212,9 +212,9 @@ jsPsych.plugins["grid-answer"] = (function() {
                 break;
               };
             };
-            if (corr == 0){
-              break;
-            };
+            // if (corr == 0){
+            //   break;
+            // };
           };
 
           var trial_data = {
