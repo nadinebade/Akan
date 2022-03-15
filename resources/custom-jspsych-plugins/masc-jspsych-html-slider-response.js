@@ -87,23 +87,15 @@ jsPsych.plugins['html-slider-response'] = (function() {
         default: true,
         description: 'If true, trial will end when user makes a response.'
       },
-      display_slider_value: {
-        type: jsPsych.plugins.parameterType.BOOL,
-        pretty_name: 'Display slider value',
-        default: true,
-        description: 'If true, display the slider value.'
-      }
     }
   }
 
   plugin.trial = function(display_element, trial) {
 
     var html = '<div id="masc-html-slider-response-wrapper" style="margin: 100px 0px;">';
-    html += '<div id="masc-html-slider-response-stimulus">' + trial.stimulus + '</div><br>';
+    html += '<div id="masc-html-slider-response-stimulus">' + trial.stimulus + '</div>';
     html += '<div class="masc-html-slider-response-container" style="position:relative;">';
-    if (trial.display_slider_value) {
-      html += '<div class="masc-html-slider-response-value" id="html-slider-response-value">' + trial.start + '%</div>';
-    }
+    html += '<div class="masc-html-slider-response-value" id="html-slider-response-value">' + trial.start + '%</div>';
     html += '<input type="range" value="'+trial.start+'" min="'+trial.min+'" max="'+trial.max+'" step="'+trial.step+'" style="width: 100%;" id="jspsych-html-slider-response-response"></input>';
     html += '<div>';
     for(var j=0; j < trial.labels.length; j++){
@@ -130,17 +122,12 @@ jsPsych.plugins['html-slider-response'] = (function() {
     var theSlider = display_element.querySelector('input[type="range"]');
 
     var sliderValueUpdater = function () {
-      if(trial.display_slider_value == false) {
-        return;
-      }
-
       var sliderValue = display_element.querySelector('#html-slider-response-value');
       var newValue = theSlider.value + "%";
       sliderValue.innerHTML = newValue;
     };
 
     theSlider.addEventListener("input", sliderValueUpdater);
-    theSlider.addEventListener("input", buttonUpdater, false);
 
     if (trial.require_movement == true) {
       document.getElementById("jspsych-html-slider-response-next").disabled = true;
@@ -150,7 +137,8 @@ jsPsych.plugins['html-slider-response'] = (function() {
     }
 
     function buttonUpdater () {
-      document.getElementById("jspsych-html-slider-response-next").disabled = false;
+      document.getElementById("jspsych-html-slider-response-next").disabled =
+        false;
     };
 
     var response = {
