@@ -57,15 +57,9 @@ var jsPsychAudioSliderResponse = (function (jspsych) {
           replay_button_label: {
             type: jspsych.ParameterType.STRING,
             pretty_name: 'Replay Button label',
-            default: 'Replay audio',
+            default: 'Play audio',
             array: false,
             description: 'Label of the button to replay.'
-          },
-          max_replays: {
-            type: jspsych.ParameterType.INT,
-            pretty_name: 'Maximum replays',
-            default: 0,
-            description: 'Maximum number of replays.'
           },
           /** If true, the participant will have to move the slider before continuing. */
           require_movement: {
@@ -73,11 +67,6 @@ var jsPsychAudioSliderResponse = (function (jspsych) {
               pretty_name: "Require movement",
               default: false,
           },
-          button_play: {
-            type: jspsych.ParameterType.BOOL,
-            pretty_name: "needs button click to play audio",
-            default: false,
-        },
           /** Any content here will be displayed below the slider. */
           prompt: {
               type: jspsych.ParameterType.HTML_STRING,
@@ -237,10 +226,6 @@ var jsPsychAudioSliderResponse = (function (jspsych) {
               html += '<button id="jspsych-audio-slider-response-replay" class="jspsych-btn">'+trial.replay_button_label+'</button>';
 
 
-             
-
-            
-
               
 
               // add submit button
@@ -276,7 +261,6 @@ var jsPsychAudioSliderResponse = (function (jspsych) {
             
 
 
-              var replay_count = 0;
 
               response = {
                   rt: null,
@@ -285,13 +269,13 @@ var jsPsychAudioSliderResponse = (function (jspsych) {
 
               // play audio automatically
 
-              if (context !== null) {
-                startTime = context.currentTime;
-                audio.start(startTime);
-            }
-            else {
-                audio.play();
-            }
+      //        if (context !== null) {
+        //        startTime = context.currentTime;
+           //     audio.start(startTime);
+          //  }
+           // else {
+            //    audio.play();
+           // }
 
               // start audio upon button click
 
@@ -306,7 +290,9 @@ var jsPsychAudioSliderResponse = (function (jspsych) {
                     else {
                         audio.play();
                     }
-              });
+              
+              
+                    });
 
             
 
@@ -331,9 +317,7 @@ var jsPsychAudioSliderResponse = (function (jspsych) {
                   .querySelector("#jspsych-audio-slider-response-next")
                   .addEventListener("click", () => {
 
-                   // reset replay count
-                   
-                   replay_count = 0;
+
 
                   // measure response time
                   var endTime = performance.now();

@@ -1,18 +1,6 @@
-var material = [
+var material_first_block = [
 
-  { audio: "audio/item_1_1.mp3",
-    sentence: "Kwesi knows whoSG came to visit you yesterday, namely Esi.",
-    id: "item.1",
-    type: "critical",
-    condition: "SG-match",
-  },
 
-  { audio: "audio/item_1_5.mp3",
-    sentence: "Yaw knows whoSG arrived last night, namely Kwame.",
-    id: "item.2",
-    type: "critical",
-    condition: "SG-match",
-  },
 
   { audio: "audio/item_1_9.mp3",
     sentence: "Kwaku knows whoSG missed the lecture, namely Kofi.",
@@ -35,12 +23,6 @@ var material = [
     condition: "SG-mismatch",
   },
 
-  { audio: "audio/item_2_12.mp3",
-    sentence: "Aba knows whoSG plays in a band, namely Badu, Kojo and Kwame.",
-    id: "item.6",
-    type: "critical",
-    condition: "SG-mismatch",
-  },
 
   { audio: "audio/item_3_3.mp3",
     sentence: "Ekow knows whoPL handed in the final assignment, namely Ebo.",
@@ -56,26 +38,7 @@ var material = [
     condition: "PL-mismatch",
   },
 
-  { audio: "audio/item_3_11.mp3",
-    sentence: "Afiba knows whoPL cheated on the exam, namely Yaw.",
-    id: "item.9",
-    type: "critical",
-    condition: "PL-mismatch",
-  },
-
-  { audio: "audio/item_4_2.mp3",
-    sentence: "Kofi knows whoPL cleaned the kitchen last week, namely Afiba, Kojo and Adu.",
-    id: "item.10",
-    type: "critical",
-    condition: "PL-match",
-  },
-
-  { audio: "audio/item_4_6.mp3",
-    sentence: "Ebo knows whoPL called yesterday, namely Ekuwa, Yaw and Kofi.",
-    id: "item.11",
-    type: "critical",
-    condition: "PL-match",
-  },
+  
 
   { audio: "audio/item_4_10.mp3",
     sentence: "Kojo knows whoPL went on holiday, namely Akua, Akosua and Abena.",
@@ -84,26 +47,108 @@ var material = [
     condition: "PL-match",
   },
 
-  { audio: "audio/filler_1_1.mp3",
-    sentence: "Kweku knows whoSG cleaned up.",
-    id: "item.13",
-    type: "filler",
-    condition: "no-follow-up",
-  },
 
   { audio: "audio/filler_1_2.mp3",
-    sentence: "Kwabena knows whoSG forgot his birthday.",
-    id: "item.14",
-    type: "filler",
-    condition: "no-follow-up",
+  sentence: "Kwabena knows whoSG forgot his birthday.",
+  id: "item.14",
+  type: "filler",
+  condition: "no-follow-up",
+},
+
+{ audio: "audio/filler_1_3.mp3",
+  sentence: "Peter knows whoSG went to the concert.",
+  id: "item.15",
+  type: "filler",
+  condition: "no-follow-up",
+},
+
+{ audio: "audio/filler_1_1.mp3",
+sentence: "Kweku knows whoSG cleaned up.",
+id: "item.13",
+type: "filler",
+condition: "no-follow-up",
+},
+
+
+{ audio: "audio/filler_2_3.mp3",
+sentence: "Abena remembers whoSG laughed at her, namely Awo, Afiba and Ekuwa.",
+id: "item.20",
+type: "filler",
+condition: "other-predicate",
+},
+
+{ audio: "audio/filler_3_1.mp3",
+sentence: "whoSG cleaned up knows Kweku (the one who cleaned up knows Kweku).",
+id: "item.21",
+type: "filler",
+condition: "ungrammatical",
+},
+
+{ audio: "audio/filler_3_2.mp3",
+sentence: "whoSG forgot his birthday knows Kwabena (the one who forgot his birthday knows Kwabena).",
+id: "item.22",
+type: "filler",
+condition: "ungrammatical",
+},
+
+{ audio: "audio/filler_3_3.mp3",
+sentence: "whoSG went to the concert Peter knows.",
+id: "item.23",
+type: "filler",
+condition: "ungrammatical",
+},
+
+
+
+];
+
+material_second_block = [
+
+  { audio: "audio/item_1_1.mp3",
+  sentence: "Kwesi knows whoSG came to visit you yesterday, namely Esi.",
+  id: "item.1",
+  type: "critical",
+  condition: "SG-match",
+},
+
+{ audio: "audio/item_1_5.mp3",
+  sentence: "Yaw knows whoSG arrived last night, namely Kwame.",
+  id: "item.2",
+  type: "critical",
+  condition: "SG-match",
+},
+
+{ audio: "audio/item_2_12.mp3",
+    sentence: "Aba knows whoSG plays in a band, namely Badu, Kojo and Kwame.",
+    id: "item.6",
+    type: "critical",
+    condition: "SG-mismatch",
   },
 
-  { audio: "audio/filler_1_3.mp3",
-    sentence: "Peter knows whoSG went to the concert.",
-    id: "item.15",
-    type: "filler",
-    condition: "no-follow-up",
-  },
+  { audio: "audio/item_3_11.mp3",
+  sentence: "Afiba knows whoPL cheated on the exam, namely Yaw.",
+  id: "item.9",
+  type: "critical",
+  condition: "PL-mismatch",
+},
+
+{ audio: "audio/item_4_2.mp3",
+  sentence: "Kofi knows whoPL cleaned the kitchen last week, namely Afiba, Kojo and Adu.",
+  id: "item.10",
+  type: "critical",
+  condition: "PL-match",
+},
+
+{ audio: "audio/item_4_6.mp3",
+  sentence: "Ebo knows whoPL called yesterday, namely Ekuwa, Yaw and Kofi.",
+  id: "item.11",
+  type: "critical",
+  condition: "PL-match",
+},
+
+
+
+
 
   { audio: "audio/filler_1_4.mp3",
     sentence: "Adwoa knows whoSG spoke at the conference.",
@@ -133,33 +178,7 @@ var material = [
     condition: "other-predicate",
   },
 
-  { audio: "audio/filler_2_3.mp3",
-    sentence: "Abena remembers whoSG laughed at her, namely Awo, Afiba and Ekuwa.",
-    id: "item.20",
-    type: "filler",
-    condition: "other-predicate",
-  },
-
-  { audio: "audio/filler_3_1.mp3",
-    sentence: "whoSG cleaned up knows Kweku (the one who cleaned up knows Kweku).",
-    id: "item.21",
-    type: "filler",
-    condition: "ungrammatical",
-  },
-
-  { audio: "audio/filler_3_2.mp3",
-    sentence: "whoSG forgot his birthday knows Kwabena (the one who forgot his birthday knows Kwabena).",
-    id: "item.22",
-    type: "filler",
-    condition: "ungrammatical",
-  },
-
-  { audio: "audio/filler_3_3.mp3",
-    sentence: "whoSG went to the concert Peter knows.",
-    id: "item.23",
-    type: "filler",
-    condition: "ungrammatical",
-  },
+ 
 
   { audio: "audio/filler_3_4.mp3",
     sentence: "whoSG spoke at the conference Adwoa knows.",
@@ -181,5 +200,7 @@ var material = [
     type: "filler",
     condition: "ungrammatical",
   },
+
+ 
 
 ];

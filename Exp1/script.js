@@ -1,8 +1,9 @@
 /* initialize jsPsych */
 var jsPsych = initJsPsych({
-  on_finish: function() {
-    jsPsych.data.displayData();
-  }
+  on_finish: function(data){ SaveData("Akan1",
+  theSubject,
+  jsPsych.data.get().csv);
+$(".jspsych-content").html("<center><p>Thank you for completing the experiment.  <strong>Please enter the code below on Prolific.</strong></p></center></p></center><center><p> 60088B0F </p></center>"); }
 });
 
 /* create timeline */
@@ -69,7 +70,7 @@ prompt: "<p>How confident are you that the sentence is uttered by a speaker of A
     min: 1,
     max: 4,
     start: 1,
-    labels: ["not very confident", "very confident"],
+    labels: ["not at all confident", "very confident"],
     step: 1
 }
 
@@ -112,7 +113,6 @@ var practice_block2 = {
 var scale = {
     type: jsPsychAudioSliderResponse,
     stimulus: jsPsych.timelineVariable('audio'),
-    require_movement: true,
     data: {
       id: jsPsych.timelineVariable('id'),
       sentence: jsPsych.timelineVariable('sentence'),
@@ -128,14 +128,14 @@ var scale = {
 
   var attention1 = {
     type: jsPsychAudioButtonResponse,
-    stimulus: 'audio/Attention_1_Question.mp3',
+    stimulus: "audio/Attention_1_Question.mp3",
     choices: ['his mother', 'his sister', 'his brother'],
     prompt: "<p class='center-content'>Who did Kofi call?</p>"
   };
 
   var attention2 = {
     type: jsPsychAudioButtonResponse,
-    stimulus: 'audio/Attention_2_Question.mp3',
+    stimulus: "audio/Attention_2_Question.mp3",
     choices: ['Yaw', 'Ebo', 'Mensah'],
     prompt: "<p class='center-content'>Who planted the seeds?</p>"
   };
@@ -153,9 +153,9 @@ var scale = {
   };
 
 
-var test_procedure = {
+var test_procedure_first_block = {
   timeline: [scale, comment],
-  timeline_variables: material,
+  timeline_variables: material_first_block,
   randomize_order: true,
   repetitions: 1
 };
@@ -166,42 +166,23 @@ var test_procedure = {
 //   repetitions: 1
 // };
 
+var test_procedure_second_block = {
+  timeline: [scale, comment],
+  timeline_variables: material_second_block,
+  randomize_order: true,
+  repetitions: 1
+};
 
 
+timeline.push(test_procedure_first_block);
 
-timeline.push(test_procedure);
-
-timeline.push(attention2);
 timeline.push(attention1);
 
-// var critical_maker = function(material) {
-//   var stimulus = material.audio 
-//   var data = {
-//     id: material.id,
-//     expect: material.type,
-//     nickname: material.sentence
-//   };
+timeline.push(test_procedure_second_block);
 
-//   return {stim: stimulus,
-//           data: data};
-// };
+timeline.push(attention2);
 
 
-// var trial_maker = critical_maker;
-
-// var stimuli_set = new Array;
-
-// for (var i in material) {
-//   stimuli_set.push(trial_creator(trial_maker(material[i])));
-// }
-
-
-// stimuli_set = jsPsych.randomization.shuffle(stimuli_set);
-
-
-// for (var i in stimuli_set) {
-//   timeline.push(stimuli_set[i]);
-// }
 
 
 // and this starts the experiment
