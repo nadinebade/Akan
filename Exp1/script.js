@@ -76,7 +76,8 @@ prompt: "<p>How confident are you that the sentence is uttered by a speaker of A
     max: 4,
     start: 1,
     labels: ["not at all confident", "very confident"],
-    step: 1
+    step: 1,
+    response_allowed_while_playing: false,
 }
 
 timeline.push(practice_block)
@@ -100,6 +101,7 @@ var practice_block2 = {
       start: 1,
       labels: ["not at all confident", "very confident"],
       step: 1,
+      response_allowed_while_playing: false,
   }
   
   timeline.push(practice_block2)
@@ -128,7 +130,8 @@ var scale = {
     max: 4,
     start: 1,
     labels: ["not at all confident", "very confident"],
-    step: 1
+    step: 1,
+    response_allowed_while_playing: false,
   };
 
   var attention1 = {
