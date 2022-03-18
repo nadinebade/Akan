@@ -1,10 +1,15 @@
 /* initialize jsPsych */
 var jsPsych = initJsPsych({
-  on_finish: function(data){ SaveData("Akan1",
-  theSubject,
-  jsPsych.data.get().csv);
-$(".jspsych-content").html("<center><p>Thank you for completing the experiment.  <strong>Please enter the code below on Prolific.</strong></p></center></p></center><center><p> 60088B0F </p></center>"); }
+  on_finish: function(){ saveData(jsPsych.data.get().csv()); }
 });
+
+function saveData(name, data){
+  var xhr = new XMLHttpRequest();
+  xhr.open('POST', '../resources/write_data.php'); // 'write_data.php' is the path to the php file.
+  xhr.setRequestHeader('Content-Type', 'application/json');
+  xhr.send(JSON.stringify({filedata: data}));
+}
+
 
 /* create timeline */
 var timeline = [];
@@ -81,7 +86,7 @@ var continue_block = {
   type: jsPsychInstructions,
   show_clickable_nav: true,
   pages: continue_next,
-  data: { questionId: "practice" }
+  data: { questionId: "continue" }
 };
 
 timeline.push(continue_block);
