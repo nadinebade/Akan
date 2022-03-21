@@ -62,13 +62,6 @@ var instructions_block2 = {
   data: { questionId: "instructions" }
 };
 
-var outro_block = {
-  type: jsPsychInstructions,
-  show_clickable_nav: false,
-  pages: outro_text,
-  data: { questionId: "outro" }
-};
-
 timeline.push(instructions_block2);
 timeline.push(instructions_block);
 
@@ -188,6 +181,13 @@ var test_procedure_second_block = {
   repetitions: 1
 };
 
+// set up outro, reading "outro_text" from text.js
+var outro_block = {
+  type: jsPsychInstructions,
+  show_clickable_nav: false,
+  pages: outro_text,
+  data: { questionId: "outro" }
+};
 
 timeline.push(test_procedure_first_block);
 
