@@ -1,6 +1,7 @@
 var instructions_text = new Array;
 var continue_next = new Array;
 var continue_next2 = new Array;
+var outro_text = new Array;
 
 
 instructions_text.push(
@@ -19,3 +20,6 @@ instructions_text.push(
 
    continue_next2.push(
    "<p>That was the second example. You should have been not confident at all that the sentence was uttered by a speaker of Akan.</p><p>Click 'Next' to start the experiment!</p>");
+
+outro_text.push(
+  "<h1>Outro</h1><p>You have reached the end of the experiment. Thank you for participating! You may now exit this window.</p>");
