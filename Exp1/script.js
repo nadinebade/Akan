@@ -62,6 +62,13 @@ var instructions_block2 = {
   data: { questionId: "instructions" }
 };
 
+var outro_block = {
+  type: jsPsychInstructions,
+  show_clickable_nav: false,
+  pages: outro_text,
+  data: { questionId: "outro" }
+};
+
 timeline.push(instructions_block2);
 timeline.push(instructions_block);
 
@@ -189,14 +196,6 @@ timeline.push(attention1);
 timeline.push(test_procedure_second_block);
 
 timeline.push(attention2);
-
-var outro_block = {
-  type: jsPsychInstructions,
-  show_clickable_nav: false,
-  pages: [
-    'You have reached the end of the experiment. Thank you for participating! You may now exit this window. <p class = "center-content">'
-    ]
-};
 
 timeline.push(outro_block);
 
