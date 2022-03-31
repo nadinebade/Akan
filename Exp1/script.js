@@ -3,7 +3,7 @@ var jsPsych = initJsPsych({
   on_finish: function(){ saveData(jsPsych.data.get().csv()); }
 });
 
-function saveData(name, data){
+function saveData(data){
   var xhr = new XMLHttpRequest();
   xhr.open('POST', '../resources/write_data.php'); // 'write_data.php' is the path to the php file.
   xhr.setRequestHeader('Content-Type', 'application/json');
@@ -191,13 +191,13 @@ var outro_block = {
 
 timeline.push(test_procedure_first_block);
 
-timeline.push(attention1);
+// timeline.push(attention1);
 
-timeline.push(test_procedure_second_block);
+// timeline.push(test_procedure_second_block);
 
-timeline.push(attention2);
+// timeline.push(attention2);
 
-timeline.push(outro_block);
+// timeline.push(outro_block);
 
 
 // and this starts the experiment
