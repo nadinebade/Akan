@@ -115,6 +115,12 @@ var practice_block2 = {
   
   timeline.push(continue_block2);
 
+  var mic = {
+    type: jsPsychInitializeMicrophone
+};
+
+timeline.push(mic);
+
 
 // create a trial to assess an inference
 var scale = {
@@ -150,15 +156,10 @@ var scale = {
 
 
   var comment = {
-    type: jsPsychSurveyText,
-    name: "Comments",
-    questions: [ {prompt:  'Why and how did you make your last choice?' } ],
-    data: {
-      id: jsPsych.timelineVariable('id'),
-      sentence: jsPsych.timelineVariable('sentence'),
-      type: jsPsych.timelineVariable('type'),
-    }
-  };
+    type: jsPsychHtmlAudioResponse,
+    stimulus: "<p class='center-content'>How would you have said it?</p>",
+    recording_duration: 15000
+};
 
 
 var test_procedure_first_block = {
