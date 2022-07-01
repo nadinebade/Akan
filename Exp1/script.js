@@ -71,11 +71,11 @@ timeline.push(instructions_block);
 var practice_block = {
 type: jsPsychAudioSliderResponse,
 stimulus: "audio/Training_Gram.mp3",
-prompt: "<p>How confident are you that the sentence is uttered by a speaker of Akan?</p>",
+prompt: "<p>How good was the sentence in Akan?</p>",
     min: 1,
     max: 4,
     start: 1,
-    labels: ["not at all confident", "very confident"],
+    labels: ["not at all good", "very good"],
     step: 1,
     response_allowed_while_playing: false,
 }
@@ -95,11 +95,11 @@ timeline.push(continue_block);
 var practice_block2 = {
   type: jsPsychAudioSliderResponse,
   stimulus: "audio/Training_Ungram.mp3",
-  prompt: "<p>How confident are you that the sentence was uttered by a speaker of Akan?</p>",
+  prompt: "<p>How good was the sentence in Akan?</p>",
       min: 1,
       max: 4,
       start: 1,
-      labels: ["not at all confident", "very confident"],
+      labels: ["not at all good", "very good"],
       step: 1,
       response_allowed_while_playing: false,
   }
@@ -115,11 +115,11 @@ var practice_block2 = {
   
   timeline.push(continue_block2);
 
- // var mic = {
-  //  type: jsPsychInitializeMicrophone
-//};
+  var mic = {
+    type: jsPsychInitializeMicrophone
+};
 
-//timeline.push(mic);
+timeline.push(mic);
 
 
 // create a trial to assess an inference
@@ -131,11 +131,11 @@ var scale = {
       sentence: jsPsych.timelineVariable('sentence'),
       type: jsPsych.timelineVariable('type'),
     },
-    prompt: "<p>How confident are you that the sentence is uttered by a speaker of Akan?</p>",
+    prompt: "<p>How good was the sentence in Akan?</p>",
     min: 1,
     max: 4,
     start: 1,
-    labels: ["not at all confident", "very confident"],
+    labels: ["not at all good", "very good"],
     step: 1,
     response_allowed_while_playing: false,
   };
@@ -155,16 +155,22 @@ var scale = {
   };
 
 
+  // var comment = {
+  //   type: jsPsychSurveyText,
+  //   name: "Comments",
+  //   questions: [ {prompt:  'Why and how did you make your last choice?' } ],
+  //   data: {
+  //     id: jsPsych.timelineVariable('id'),
+  //     sentence: jsPsych.timelineVariable('sentence'),
+  //     type: jsPsych.timelineVariable('type'),
+  //   }
+  // };
+
   var comment = {
-    type: jsPsychSurveyText,
-    name: "Comments",
-    questions: [ {prompt:  'Why and how did you make your last choice?' } ],
-    data: {
-      id: jsPsych.timelineVariable('id'),
-      sentence: jsPsych.timelineVariable('sentence'),
-      type: jsPsych.timelineVariable('type'),
-    }
-  };
+    type: jsPsychHtmlAudioResponse,
+    stimulus: "<p>How would you have said the last sentence in Akan? Just speak into you microphone and click 'Continue' when you are done recording.</p>",
+    recording_duration: 15000
+};
 
 
 var test_procedure_first_block = {
