@@ -21,7 +21,7 @@ var theSubject = jsPsych.randomization.randomID(10);
 jsPsych.data.addProperties({ subjectId: theSubject });
 jsPsych.data.addProperties({ group_name: "group1" });
 
-var audio = ['audio/filler_1_1.mp3', 'audio/filler_1_2.mp3', 'audio/filler_1_3.mp3','audio/filler_1_4.mp3','audio/filler_1_5.mp3', 'audio/filler_2_1.mp3', 'audio/filler_2_2.mp3', 'audio/filler_2_3.mp3', 'audio/filler_3_1.mp3', 'audio/filler_3_2.mp3', 'audio/filler_3_3.mp3', 'audio/filler_3_4.mp3','audio/filler_3_5.mp3','audio/filler_3_6.mp3', 'audio/item_1_1.mp3','audio/item_1_2.mp3', 'audio/item_1_3.mp3', 'audio/item_1_4.mp3', 'audio/item_1_5.mp3', 'audio/item_1_6.mp3','audio/item_1_7.mp3', 'audio/item_1_8.mp3', 'audio/item_1_9.mp3', 'audio/item_1_10.mp3', 'audio/item_1_11.mp3', 'audio/item_1_12.mp3', 'audio/item_2_1.mp3', 'audio/item_2_2.mp3', 'audio/item_2_3.mp3', 'audio/item_2_4.mp3', 'audio/item_2_5.mp3', 'audio/item_2_6.mp3', 'audio/item_2_7.mp3', 'audio/item_2_8.mp3', 'audio/item_2_9.mp3', 'audio/item_2_10.mp3', 'audio/item_2_11.mp3', 'audio/item_2_12.mp3', 'audio/item_3_1.mp3', 'audio/item_3_2.mp3', 'audio/item_3_3.mp3', 'audio/item_3_4.mp3', 'audio/item_3_5.mp3', 'audio/item_3_6.mp3', 'audio/item_3_7.mp3', 'audio/item_3_8.mp3', 'audio/item_3_9.mp3', 'audio/item_3_10.mp3', 'audio/item_3_11.mp3', 'audio/item_3_12.mp3', 'audio/item_4_1.mp3', 'audio/item_4_2.mp3', 'audio/item_4_3.mp3', 'audio/item_4_4.mp3', 'audio/item_4_5.mp3', 'audio/item_4_6.mp3', 'audio/item_4_7.mp3', 'audio/item_4_8.mp3', 'audio/item_4_9.mp3', 'audio/item_4_10.mp3', 'audio/item_4_11.mp3', 'audio/item_4_12.mp3',];
+var audio = ['audio/filler_nf_1.mp3', 'audio/filler_nf_2.mp3', 'audio/filler_nf_3.mp3','audio/filler_nf_4.mp3','audio/filler_nf_5.mp3', 'audio/filler_op_1.mp3', 'audio/filler_op_2.mp3', 'audio/filler_op_3.mp3', 'audio/filler_ungr_1.mp3', 'audio/filler_ungr_2.mp3', 'audio/filler_ungr_3.mp3', 'audio/filler_ungr_4.mp3','audio/filler_ungr_5.mp3','audio/filler_ungr_6.mp3', 'audio/item1_pl_pl.mp3','audio/item1_sg_sg.mp3', 'audio/item1_sg_pl.mp3', 'audio/item1_pl_sg.mp3', 'audio/item2_pl_pl.mp3', 'audio/item2_sg_sg.mp3','audio/item2_sg_pl.mp3', 'audio/item2_pl_sg.mp3', 'audio/item3_pl_pl.mp3', 'audio/item3_sg_sg.mp3', 'audio/item3_sg_pl.mp3', 'audio/item3_pl_sg.mp3', 'audio/item4_pl_pl.mp3', 'audio/item4_sg_sg.mp3', 'audio/item4_sg_pl.mp3', 'audio/item4_pl_sg.mp3', 'audio/item5_sg_sg.mp3', 'audio/item5_pl_pl.mp3', 'audio/item5_sg_pl.mp3', 'audio/item5_pl_sg.mp3', 'audio/item6_sg_sg.mp3', 'audio/item6_pl_pl.mp3', 'audio/item6_sg_pl.mp3', 'audio/item6_pl_sg.mp3', 'audio/item7_sg_sg.mp3', 'audio/item7_pl_pl.mp3', 'audio/item7_sg_pl.mp3', 'audio/item7_pl_sg.mp3', 'audio/item8_sg_sg.mp3', 'audio/item8_pl_pl.mp3', 'audio/item8_sg_pl.mp3', 'audio/item8_pl_sg.mp3', 'audio/item9_sg_sg.mp3', 'audio/item9_pl_pl.mp3', 'audio/item9_sg_pl.mp3', 'audio/item9_pl_sg.mp3', 'audio/item10_sg_sg.mp3', 'audio/item10_pl_pl.mp3', 'audio/item10_sg_pl.mp3', 'audio/item10_pl_sg.mp3', 'audio/item11_sg_sg.mp3', 'audio/item11_sg_pl.mp3', 'audio/item11_pl_pl.mp3', 'audio/item11_pl_sg.mp3', 'audio/item12_sg_sg.mp3', 'audio/item12_pl_pl.mp3', 'audio/item12_sg_pl.mp3', 'audio/item12_pl_sg.mp3',];
 
 
 
@@ -37,7 +37,7 @@ timeline.push(preload);
 
 
 function play() {
-  var audio_intro = new Audio('audio/Intro.mp3');
+  var audio_intro = new Audio('audio/intro.mp3');
   audio_intro.play();
 };
 
@@ -70,7 +70,7 @@ timeline.push(instructions_block);
 
 var practice_block = {
 type: jsPsychAudioSliderResponse,
-stimulus: "audio/Training_Gram.mp3",
+stimulus: "audio/training_1.mp3",
 prompt: "<p>How good was the sentence in Akan?</p>",
     min: 1,
     max: 4,
@@ -94,7 +94,7 @@ timeline.push(continue_block);
 
 var practice_block2 = {
   type: jsPsychAudioSliderResponse,
-  stimulus: "audio/Training_Ungram.mp3",
+  stimulus: "audio/training_2.mp3",
   prompt: "<p>How good was the sentence in Akan?</p>",
       min: 1,
       max: 4,
@@ -142,14 +142,14 @@ var scale = {
 
   var attention1 = {
     type: jsPsychAudioButtonResponse,
-    stimulus: "audio/Attention_1_Question.mp3",
+    stimulus: "audio/attention_3.mp3",
     choices: ['his mother', 'his sister', 'his brother'],
     prompt: "<p class='center-content'>Who did Kofi call?</p>"
   };
 
   var attention2 = {
     type: jsPsychAudioButtonResponse,
-    stimulus: "audio/Attention_2_Question.mp3",
+    stimulus: "audio/attention_4.mp3",
     choices: ['Yaw', 'Ebo', 'Mensah'],
     prompt: "<p class='center-content'>Who planted the seeds?</p>"
   };
@@ -180,11 +180,6 @@ var test_procedure_first_block = {
   repetitions: 1
 };
 
-// var test_procedure2 = {
-//   timeline: [test_procedure, attention1, attention2],
-//   randomize_order: true,
-//   repetitions: 1
-// };
 
 var test_procedure_second_block = {
   timeline: [scale, comment],
@@ -203,13 +198,13 @@ var outro_block = {
 
 timeline.push(test_procedure_first_block);
 
-// timeline.push(attention1);
+timeline.push(attention1);
 
-// timeline.push(test_procedure_second_block);
+ timeline.push(test_procedure_second_block);
 
-// timeline.push(attention2);
+ timeline.push(attention2);
 
-// timeline.push(outro_block);
+ timeline.push(outro_block);
 
 
 // and this starts the experiment
