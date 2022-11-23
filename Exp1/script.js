@@ -1,16 +1,23 @@
 /* initialize jsPsych */
+// var jsPsych = initJsPsych({
+//     on_finish: function() {
+//         saveData(jsPsych.data.get().csv());
+//     }
+// });
+
+// function saveData(data) {
+//     var xhr = new XMLHttpRequest();
+//     xhr.open('POST', '../resources/write_data.php'); // 'write_data.php' is the path to the php file.
+//     xhr.setRequestHeader('Content-Type', 'application/json');
+//     xhr.send(JSON.stringify({filedata: data}));
+// }
+
+/* display data */
 var jsPsych = initJsPsych({
     on_finish: function() {
-        saveData(jsPsych.data.get().csv());
+        jsPsych.data.displayData('csv');
     }
-});
-
-function saveData(data) {
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', '../resources/write_data.php'); // 'write_data.php' is the path to the php file.
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.send(JSON.stringify({filedata: data}));
-}
+})
 
 
 /* create timeline */
@@ -226,8 +233,10 @@ var attention2 = {
 
 var comment = {
     type: jsPsychHtmlAudioResponse,
-    stimulus: "<p>How would you have said the last sentence in Akan? Just speak into you microphone and click 'Continue' when you are done recording.</p>",
-    recording_duration: 15000
+    stimulus: "<p>How would you have said the last sentence in Akan? Use the 'Start' button to start the recording and the 'Stop' button to stop it. You can listen to your recording afterwards and re-record if necessary.</p>",
+    recording_duration: 5000,
+    start_recording_automatically: false,
+    allow_playback: true
 };
 
 var test_procedure_first_block = {
