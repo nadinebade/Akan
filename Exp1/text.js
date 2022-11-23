@@ -5,7 +5,7 @@ var outro_text = new Array;
 
 
 instructions_text.push(
-  "<h1>Instructions (1/3)</h1><p>In this experiment you will hear audio recordings of sentences spoken in Akan. Your task is to judge how confident you are that the sentence was uttered by a speaker of Akan. You will be asked to provide your answer on a sliding scale.</p><p>Before moving on to the examples, click 'Next' to read a description of what a trial looks like.</p>");
+  "<h1>Instructions (1/3)</h1><p>In this experiment you will hear audio recordings of sentences spoken in Akan. Your task is to judge how good the sentence is. You will be asked to provide your answer on a sliding scale.</p><p>Before moving on to the examples, click 'Next' to read a description of what a trial looks like.</p>");
 
   instructions_text.push(
     "<h1>Instructions (2/3)</h1><p>To play the audio recording of the Akan sentence, press the 'Play audio' button at the beginning of each trial. Then please select how good the sentence is according to you using the slider. It offers you different options between 'not good at all' and 'very good'.</p>");
