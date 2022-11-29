@@ -1,23 +1,31 @@
 /* initialize jsPsych */
-var jsPsych = initJsPsych({
-    on_finish: function() {
-        saveData(jsPsych.data.get().csv());
-    }
-});
 
-function saveData(data) {
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', '../resources/write_data.php'); // 'write_data.php' is the path to the php file.
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.send(JSON.stringify({filedata: data}));
-}
 
-/* display data */
+
 // var jsPsych = initJsPsych({
 //     on_finish: function() {
-//         jsPsych.data.displayData('csv');
+//         saveData(jsPsych.data.get().csv());
 //     }
-// })
+// });
+
+// function saveData(data) {
+//     var xhr = new XMLHttpRequest();
+//     xhr.open('POST', '../resources/write_data.php'); // 'write_data.php' is the path to the php file.
+//     xhr.setRequestHeader('Content-Type', 'application/json');
+//     xhr.send(JSON.stringify({filedata: data}));
+// }
+
+/* display data */
+var jsPsych = initJsPsych({
+   on_finish: function() {
+   jsPsych.data.displayData("json");
+   var data = jsPsych.data.get();
+   console.log(data.csv());
+   data.localSave("csv", "data.csv");
+}
+});
+
+
 
 
 /* create timeline */
