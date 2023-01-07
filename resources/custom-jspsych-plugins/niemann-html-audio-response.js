@@ -41,12 +41,12 @@ var jsPsychHtmlAudioResponse = (function (jspsych) {
           /** EXTENSION: Label for the start recording button. Only used if start_recording_automatically is true. */
           start_button_label: {
             type: jspsych.ParameterType.STRING,
-            default: "Start"
+            default: "Start recording"
           },
           /** EXTENSION: Label for the stop recording button. Only used if start_recording_automatically is true. */
           stop_button_label: {
             type: jspsych.ParameterType.STRING,
-            default: "Stop"
+            default: "Stop recording"
           },
           /** Label for the done (stop recording) button. Only used if show_done_button is true. */
           done_button_label: {
@@ -136,17 +136,35 @@ var jsPsychHtmlAudioResponse = (function (jspsych) {
               btn.addEventListener("click", () => {
                   const end_time = performance.now();
                   this.rt = Math.round(end_time - this.stimulus_start_time);
-                  this.stopRecording().then(() => {
                       if (trial.allow_playback) {
                           this.showPlaybackControls(display_element, trial);
                       }
                       else {
                           this.endTrial(display_element, trial);
                       }
-                  });
+                  ;
               });
           }
       }
+      // USE THIS CODE FOR MANDATORY RECORDING
+    //   addButtonEvent(display_element, trial) {
+    //     const btn = display_element.querySelector("#finish-trial");
+    //     if (btn) {
+    //         btn.addEventListener("click", () => {
+    //             const end_time = performance.now();
+    //             this.rt = Math.round(end_time - this.stimulus_start_time);
+    //             this.stopRecording().then(() => {
+    //                 if (trial.allow_playback) {
+    //                     this.showPlaybackControls(display_element, trial);
+    //                 }
+    //                 else {
+    //                     this.endTrial(display_element, trial);
+    //                 }
+    //             });
+    //         });
+    //     }
+    // }
+
       setupRecordingEvents(display_element, trial) {
           this.data_available_handler = (e) => {
               if (e.data.size > 0) {
@@ -239,7 +257,7 @@ var jsPsychHtmlAudioResponse = (function (jspsych) {
 
           display_element.querySelector("#start-trial").disabled = false;
           display_element.querySelector("#stop-trial").disabled = true;
-          display_element.querySelector("#finish-trial").disabled = true;
+          display_element.querySelector("#finish-trial").disabled = false;
 
           display_element.querySelector("#start-trial").addEventListener("click", () => {
               display_element.querySelector("#start-trial").disabled = true;

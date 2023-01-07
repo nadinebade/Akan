@@ -15,16 +15,16 @@
 //     xhr.send(JSON.stringify({filedata: data}));
 // }
 
-/* display data */
+/* locally save data */
 var jsPsych = initJsPsych({
-   on_finish: function() {
-   jsPsych.data.displayData("json");
-   var data = jsPsych.data.get();
-   console.log(data.csv());
-   data.localSave("csv", "data.csv");
-}
+    override_safe_mode: true,
+    on_finish: function() {
+        jsPsych.data.displayData("csv");    
+        var data = jsPsych.data.get();
+        console.log(data.csv());            
+        data.localSave("csv", "daten.csv"); 
+    }
 });
-
 
 
 
@@ -118,6 +118,14 @@ function play() {
 }
 
 
+// set up consent 
+var consent = {
+    type: jsPsychInstructions,
+    show_clickable_nav: true,
+    pages: consent_text,
+    data: { questionId: "consent" }
+};
+
 // set up instructions, reading "instructions_text" from instructions.js
 var instructions_block = {
     type: jsPsychInstructions,
@@ -136,6 +144,7 @@ var instructions_block2 = {
     data: { questionId: "instructions" }
 };
 
+timeline.push(consent);
 timeline.push(instructions_block2);
 timeline.push(instructions_block);
 
@@ -241,8 +250,8 @@ var attention2 = {
 
 var comment = {
     type: jsPsychHtmlAudioResponse,
-    stimulus: "<p>How would you have said the last sentence in Akan? Use the 'Start' button to start the recording and the 'Stop' button to stop it. You can listen to your recording afterwards and re-record if necessary.</p>",
-    recording_duration: 5000,
+    stimulus: "<p>How would you have said the last sentence in Akan? Use the 'Start recording' button and just start speaking. Use the 'Stop' button when you are done recording. You can also skip recording with 'Continue' if the sentence was fine as you heard it. You can listen to your recording afterwards and re-record if necessary.</p>",
+    recording_duration: 10000,
     start_recording_automatically: false,
     allow_playback: true
 };
