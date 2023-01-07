@@ -25,4 +25,4 @@ instructions_text.push(
    "<p>That was the second example.</p><p>Click 'Next' to start the experiment!</p>");
 
 outro_text.push(
-  "<h1>Outro</h1><p>You have reached the end of the experiment. Thank you for participating! You may now close this window.</p>");
+  "<h1>Outro</h1><p>You have reached the end of the experiment. Thank you for participating! Please click on 'Finish' and inform the instructor.</p>");

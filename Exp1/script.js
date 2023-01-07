@@ -17,12 +17,11 @@
 
 /* locally save data */
 var jsPsych = initJsPsych({
-    override_safe_mode: true,
     on_finish: function() {
-        jsPsych.data.displayData("csv");    
+        jsPsych.data.displayData("csv");    // Daten ausgeben
         var data = jsPsych.data.get();
-        console.log(data.csv());            
-        data.localSave("csv", "daten.csv"); 
+        console.log(data.csv());            // Konsolenausgabe
+        data.localSave("csv", "daten.csv"); // Daten speichern
     }
 });
 
@@ -36,7 +35,7 @@ var theSubject = jsPsych.randomization.randomID(10);
 
 // and add it to the data being saved
 jsPsych.data.addProperties({ subjectId: theSubject });
-jsPsych.data.addProperties({ group_name: "group1" });
+jsPsych.data.addProperties({ group_name: group });
 
 var audio = [
     'audio/filler_nf_1.mp3',
@@ -122,16 +121,14 @@ function play() {
 var consent = {
     type: jsPsychInstructions,
     show_clickable_nav: true,
-    pages: consent_text,
-    data: { questionId: "consent" }
+    pages: consent_text
 };
 
 // set up instructions, reading "instructions_text" from instructions.js
 var instructions_block = {
     type: jsPsychInstructions,
     show_clickable_nav: true,
-    pages: instructions_text,
-    data: { questionId: "instructions" }
+    pages: instructions_text
 };
 
 // set up instoduction in Akan
@@ -140,8 +137,7 @@ var instructions_block2 = {
     show_clickable_nav: true,
     pages: [
         'Welcome to our experiment! Click on "PLAY" to hear a description of the experiment in Akan. <p class = "center-content"><input type="button" value="PLAY" onclick="play()"></><p class = "center-content">Click "Next" to continue to further instructions.</>'
-    ],
-    data: { questionId: "instructions" }
+    ]
 };
 
 timeline.push(consent);
@@ -280,10 +276,15 @@ timeline.push(attention2);
 // set up outro, reading "outro_text" from text.js
 var outro_block = {
   type: jsPsychInstructions,
-  show_clickable_nav: false,
   pages: outro_text,
-  data: { questionId: "outro" }
+  allow_backward: false,
+  show_clickable_nav: true,
+  button_label_next: "Finish",
+  on_finish: function() {
+      //window.close(); // Tab im Browser schließen
+  }
 };
+
 
 timeline.push(outro_block);
 

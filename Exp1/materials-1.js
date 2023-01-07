@@ -10,12 +10,12 @@ var material_first_block = [
 
   
 
-  { audio: "audio/item6_sg_pl.mp3",
-    sentence: "Akosua knows whoSG called yesterday, namely Akua, Yaw and Kofi.",
-    id: "item.6",
-    type: "critical",
-    condition: "SG-mismatch",
-  },
+  // { audio: "audio/item6_sg_pl.mp3",
+  //   sentence: "Akosua knows whoSG called yesterday, namely Akua, Yaw and Kofi.",
+  //   id: "item.6",
+  //   type: "critical",
+  //   condition: "SG-mismatch",
+  // },
 
 
 //   { audio: "audio/item9_pl_sg.mp3",
@@ -96,12 +96,12 @@ var material_first_block = [
     condition: "no_follow-up",
   },
 
-  { audio: "audio/filler_nf_3.mp3",
-    sentence: "Yaw knows whoSG went to the concert.",
-    id: "item.15",
-    type: "filler",
-    condition: "no_follow-up",
-  },
+  // { audio: "audio/filler_nf_3.mp3",
+  //   sentence: "Yaw knows whoSG went to the concert.",
+  //   id: "item.15",
+  //   type: "filler",
+  //   condition: "no_follow-up",
+  // },
 
 //   { audio: "audio/filler_op_1.mp3",
 //     sentence: "Kofi discovered whoPL cleaned the kitchen last week, namely Afia, Ama and Kofi.",
