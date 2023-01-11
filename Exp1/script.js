@@ -247,7 +247,7 @@ var attention2 = {
 var comment = {
     type: jsPsychHtmlAudioResponse,
     stimulus: "<p>How would you have said the last sentence in Akan? Use the 'Start recording' button and just start speaking. Use the 'Stop' button when you are done recording. You can also skip recording with 'Continue' if the sentence was fine as you heard it. You can listen to your recording afterwards and re-record if necessary.</p>",
-    recording_duration: 10000,
+    recording_duration: 20000,
     start_recording_automatically: false,
     allow_playback: true
 };
